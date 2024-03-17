@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="128dp"
+        android:height="128dp"
+        android:gravity="center"
+        android:drawable="@drawable/card" />
+    <item
+        android:width="64dp"
+        android:height="64dp"
+        android:drawable="@drawable/barcode"
+        android:gravity="center"
+        android:right="32dp" />
+    <item
+        android:width="52dp"
+        android:height="52dp"
+        android:drawable="@drawable/bookmark"
+        android:gravity="center"
+        android:left="72dp"
+        android:bottom="20dp" />
+</layer-list>

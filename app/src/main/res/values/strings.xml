@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="kp2aplugin_title" tools:keep="@string/kp2aplugin_title">Fidelity</string>
+    <string name="kp2aplugin_shortdesc">Stores and Displays fidelity and other cards</string>
+    <string name="kp2aplugin_author" tools:keep="@string/kp2aplugin_author">[soraefir](soraefir)</string>
+
+    <string name="app_name">Keepass Fidelity</string>
+
+    <string name="barcode_preview">barcode preview</string>
+    <string name="expand">Expand</string>
+    <string name="manual">Manual</string>
+    <string name="scan">Scan</string>
+    <string name="query">Query</string>
+    <string name="title">Title</string>
+    <string name="code">Code</string>
+    <string name="format">Format</string>
+    <string name="save">Save</string>
+    <string-array name="format_array">
+        <item>CODE_128</item>
+        <item>CODE_39</item>
+        <item>CODE_93</item>
+        <item>EAN_8</item>
+        <item>EAN_13</item>
+        <item>CODE_QR</item>
+        <item>UPC_A</item>
+        <item>UPC_E</item>
+        <item>PDF_417</item>
+    </string-array>
+</resources>
