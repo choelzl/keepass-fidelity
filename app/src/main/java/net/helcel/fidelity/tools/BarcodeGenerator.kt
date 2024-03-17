@@ -19,8 +19,8 @@ object BarcodeGenerator {
             android.graphics.Color.WHITE
     }
 
-    fun generateBarcode(content: String, f: String, width: Int): Bitmap? {
-        if (content.isEmpty() || f.isEmpty()) {
+    fun generateBarcode(content: String?, f: String?, width: Int): Bitmap? {
+        if (content.isNullOrEmpty() || f.isNullOrEmpty()) {
             return null
         }
         try {
@@ -33,11 +33,8 @@ object BarcodeGenerator {
             for (x in 0 until width) {
                 for (y in 0 until height) {
                     bitmap.setPixel(
-                        x,
-                        y,
-                        getPixelColor(bitMatrix, x, y)
+                        x, y, getPixelColor(bitMatrix, x, y)
                     )
-
                 }
             }
             return bitmap

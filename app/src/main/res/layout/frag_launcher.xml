@@ -9,7 +9,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fidelityList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="24dp" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,7 +26,6 @@
         app:srcCompat="@drawable/search" />
 
     <LinearLayout
-        android:id="@+id/expandedMenuContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -20,7 +20,6 @@ object BarcodeFormatConverter {
         }
     }
 
-
     fun formatToString(f: Int): String {
         return when (f) {
             Barcode.FORMAT_CODE_128 -> "CODE_128"

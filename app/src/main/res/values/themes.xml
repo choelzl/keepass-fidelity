@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Fidelity" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Fidelity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">?attr/colorAccent</item>
-
+        <item name="colorPrimary">#7DB9F5</item>
+        <item name="colorPrimaryVariant">#7DB9F5</item>
+        <item name="colorSecondary">#7DB9F5</item>
+        <item name="colorSecondaryVariant">#7DB9F5</item>
+        <item name="colorOnPrimary">#030B12</item>
     </style>
 </resources>

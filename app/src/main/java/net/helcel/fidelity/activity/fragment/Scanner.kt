@@ -27,7 +27,6 @@ class Scanner : Fragment() {
 
     private var code: String = ""
     private var fmt: String = ""
-    private var valid: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,13 +34,14 @@ class Scanner : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragScannerBinding.inflate(layoutInflater)
-        binding.bottomText.setOnClickListener {
+        binding.btnScanDone.setOnClickListener {
             startCreateEntry()
         }
         when (hasCameraPermission()) {
             true -> bindCameraUseCases()
             else -> requestPermission()
         }
+        binding.btnScanDone.isEnabled = false
         return binding.root
     }
 
@@ -92,9 +92,10 @@ class Scanner : Fragment() {
                 if (code != null && format != null) {
                     this.code = code
                     this.fmt = format
-                    this.valid = true
+                    binding.btnScanDone.isEnabled = true
+
                 } else {
-                    this.valid = false
+                    binding.btnScanDone.isEnabled = false
                 }
             }
             try {
@@ -111,6 +112,4 @@ class Scanner : Fragment() {
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
-
-
 }

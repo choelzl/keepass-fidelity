@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -21,7 +22,8 @@
 
         <receiver
             android:name=".pluginSDK.PluginAccessReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="keepass2android.ACTION_TRIGGER_REQUEST_ACCESS" />
                 <action android:name="keepass2android.ACTION_RECEIVE_ACCESS" />
@@ -31,12 +33,13 @@
 
         <receiver
             android:name=".pluginSDK.PluginActionBroadcastReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="keepass2android.ACTION_OPEN_ENTRY" />
                 <action android:name="keepass2android.ACTION_CLOSE_ENTRY_VIEW" />
                 <action android:name="keepass2android.ACTION_ENTRY_ACTION_SELECTED" />
-
+                
                 <action android:name="keepass2android.ACTION_LOCK_DATABASE" />
                 <action android:name="keepass2android.ACTION_UNLOCK_DATABASE" />
                 <action android:name="keepass2android.ACTION_CLOSE_DATABASE" />

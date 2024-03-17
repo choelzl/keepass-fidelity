@@ -15,9 +15,9 @@ import net.helcel.fidelity.tools.BarcodeFormatConverter.formatToString
 import java.util.concurrent.Executors
 
 
-@OptIn(ExperimentalGetImage::class)
 object BarcodeScanner {
 
+    @OptIn(ExperimentalGetImage::class)
     private fun processImageProxy(
         barcodeScanner: BarcodeScanner,
         imageProxy: ImageProxy,
@@ -33,8 +33,6 @@ object BarcodeScanner {
 
             barcodeScanner.process(inputImage)
                 .addOnSuccessListener { barcodeList ->
-                    println(barcodeList.map { e -> e.displayValue })
-                    println(barcodeList.map { e -> e.format })
                     val barcode =
                         barcodeList.getOrNull(0)
                     if (barcode != null)

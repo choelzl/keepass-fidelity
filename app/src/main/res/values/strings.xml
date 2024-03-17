@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="kp2aplugin_title" tools:keep="@string/kp2aplugin_title">Fidelity</string>
-    <string name="kp2aplugin_shortdesc">Stores and Displays fidelity and other cards</string>
-    <string name="kp2aplugin_author" tools:keep="@string/kp2aplugin_author">[soraefir](soraefir)</string>
+    <string name="kp2aplugin_shortdesc" tools:keep="@string/kp2aplugin_shortdesc">Fidelity adds an interface to manage fidelity cards and other barcodes to Keepass2Android</string>
+    <string name="kp2aplugin_author" tools:keep="@string/kp2aplugin_author">Soraefir</string>
 
     <string name="app_name">Keepass Fidelity</string>
 

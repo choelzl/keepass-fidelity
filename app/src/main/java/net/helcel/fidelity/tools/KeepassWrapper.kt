@@ -42,12 +42,11 @@ object KeepassWrapper {
         callback: (HashMap<String, String>) -> Unit
     ): ActivityResultLauncher<Intent> {
         return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+            println(result.toString())
             if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val credentials = Kp2aControl.getEntryFieldsFromIntent(
-                    data!!
-                )
-                println(credentials)
+                val credentials = Kp2aControl.getEntryFieldsFromIntent(result.data)
+                println(credentials.toList().toString())
                 callback(credentials)
             }
         }
@@ -59,11 +58,8 @@ object KeepassWrapper {
     ): ActivityResultLauncher<Intent> {
         return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val credentials = Kp2aControl.getEntryFieldsFromIntent(
-                    data!!
-                )
-                println(credentials)
+                val credentials = Kp2aControl.getEntryFieldsFromIntent(result.data)
+                println(credentials.toList().toString())
                 callback(credentials)
             }
         }

@@ -67,7 +67,7 @@ class CreateEntry : Fragment() {
                 ErrorToaster.formIncomplete(requireActivity())
 
             } else {
-                val kpentry = KeepassWrapper.entryCreate(
+                val kpEntry = KeepassWrapper.entryCreate(
                     this,
                     binding.editTextTitle.text.toString(),
                     binding.editTextCode.text.toString(),
@@ -77,8 +77,8 @@ class CreateEntry : Fragment() {
                 try {
                     resultLauncherAdd.launch(
                         Kp2aControl.getAddEntryIntent(
-                            kpentry.first,
-                            kpentry.second
+                            kpEntry.first,
+                            kpEntry.second
                         )
                     )
                 } catch (e: ActivityNotFoundException) {
@@ -108,23 +108,21 @@ class CreateEntry : Fragment() {
             binding.editTextCode.error = e.message
         } catch (e: Exception) {
             binding.imageViewPreview.setImageBitmap(null)
-            println(e.javaClass)
-            println(e.message)
             e.printStackTrace()
         }
     }
 
     private fun isValid(): Boolean {
         var valid = true
-        if (binding.editTextTitle.text!!.isEmpty()) {
+        if (binding.editTextTitle.text.isNullOrEmpty()) {
             valid = false
             binding.editTextTitle.error = "Title cannot be empty"
         }
-        if (binding.editTextCode.text!!.isEmpty()) {
+        if (binding.editTextCode.text.isNullOrEmpty()) {
             valid = false
             binding.editTextCode.error = "Code cannot be empty"
         }
-        if (binding.editTextFormat.text!!.isEmpty()) {
+        if (binding.editTextFormat.text.isNullOrEmpty()) {
             valid = false
             binding.editTextFormat.error = "Format cannot be empty"
         }
