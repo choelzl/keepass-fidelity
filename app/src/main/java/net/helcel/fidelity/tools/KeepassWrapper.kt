@@ -31,10 +31,8 @@ object KeepassWrapper {
         fields[CODE_FIELD] = code
         fields[FORMAT_FIELD] = format
         fields[PROTECT_CODE_FIELD] = protectCode.toString()
+        protected.add(CODE_FIELD)
 
-        if (protectCode) {
-            protected.add(CODE_FIELD)
-        }
         return Pair(fields, protected)
     }
 

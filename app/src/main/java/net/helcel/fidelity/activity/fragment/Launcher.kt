@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.helcel.fidelity.R
 import net.helcel.fidelity.activity.adapter.FidelityListAdapter
 import net.helcel.fidelity.databinding.FragLauncherBinding
@@ -59,6 +61,8 @@ class Launcher : Fragment() {
             startViewEntry(it.first, it.second, it.third)
         }
         binding.fidelityList.adapter = fidelityListAdapter
+
+        recyclerSlideHelper().attachToRecyclerView(binding.fidelityList)
         return binding.root
     }
 
@@ -101,5 +105,23 @@ class Launcher : Fragment() {
         val viewEntryFragment = ViewEntry()
         viewEntryFragment.arguments = KeepassWrapper.bundleCreate(title, code, fmt)
         startFragment(viewEntryFragment)
+    }
+
+    private fun recyclerSlideHelper(): ItemTouchHelper {
+        return ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.adapterPosition
+                CacheManager.rmFidelity(pos)
+                fidelityListAdapter.notifyItemRemoved(pos)
+            }
+        })
     }
 }

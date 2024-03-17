@@ -21,6 +21,11 @@ object CacheManager {
         saveFidelity()
     }
 
+    fun rmFidelity(idx: Int) {
+        data.removeAt(idx)
+        saveFidelity()
+    }
+
     private fun saveFidelity() {
         val editor = pref?.edit()
         val gson = Gson()
