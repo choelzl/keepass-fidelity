@@ -23,7 +23,7 @@ class Launcher : Fragment() {
     private lateinit var binding: FragLauncherBinding
     private lateinit var fidelityListAdapter: FidelityListAdapter
 
-    private val resultLauncherQuery = KeepassWrapper.resultLauncherQuery(this) {
+    private val resultLauncherQuery = KeepassWrapper.resultLauncher(this) {
         val r = KeepassWrapper.entryExtract(it)
         if (!KeepassWrapper.isProtected(it)) {
             CacheManager.addFidelity(r)
@@ -80,7 +80,7 @@ class Launcher : Fragment() {
 
     private fun startGetFromKeepass() {
         try {
-            this.resultLauncherQuery.launch(Kp2aControl.queryEntryIntentForOwnPackage)
+            this.resultLauncherQuery.launch(Kp2aControl.getQueryEntryForOwnPackageIntent())
         } catch (e: ActivityNotFoundException) {
             ErrorToaster.noKP2AFound(requireActivity())
         }

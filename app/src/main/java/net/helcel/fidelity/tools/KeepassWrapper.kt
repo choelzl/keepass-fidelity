@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import net.helcel.fidelity.pluginSDK.KeepassDefs
+import net.helcel.fidelity.pluginSDK.KeepassDef
 import net.helcel.fidelity.pluginSDK.Kp2aControl
 
 object KeepassWrapper {
@@ -25,8 +25,8 @@ object KeepassWrapper {
 
         val fields = HashMap<String?, String?>()
         val protected = ArrayList<String?>()
-        fields[KeepassDefs.TitleField] = title
-        fields[KeepassDefs.UrlField] =
+        fields[KeepassDef.TitleField] = title
+        fields[KeepassDef.UrlField] =
             "androidapp://" + fragment.requireActivity().packageName
         fields[CODE_FIELD] = code
         fields[FORMAT_FIELD] = format
@@ -37,26 +37,14 @@ object KeepassWrapper {
     }
 
 
-    fun resultLauncherAdd(
+    fun resultLauncher(
         fragment: Fragment,
         callback: (HashMap<String, String>) -> Unit
     ): ActivityResultLauncher<Intent> {
         return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 
-            println(result.toString())
-            if (result.resultCode == Activity.RESULT_OK) {
-                val credentials = Kp2aControl.getEntryFieldsFromIntent(result.data)
-                println(credentials.toList().toString())
-                callback(credentials)
-            }
-        }
-    }
-
-    fun resultLauncherQuery(
-        fragment: Fragment,
-        callback: (HashMap<String, String>) -> Unit
-    ): ActivityResultLauncher<Intent> {
-        return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            println(result.resultCode)
+            println(result.data.toString())
             if (result.resultCode == Activity.RESULT_OK) {
                 val credentials = Kp2aControl.getEntryFieldsFromIntent(result.data)
                 println(credentials.toList().toString())
@@ -67,7 +55,7 @@ object KeepassWrapper {
 
     fun entryExtract(map: HashMap<String, String>): Triple<String?, String?, String?> {
         return Triple(
-            map[KeepassDefs.TitleField],
+            map[KeepassDef.TitleField],
             map[CODE_FIELD],
             map[FORMAT_FIELD]
         )

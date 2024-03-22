@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -21,32 +20,28 @@
         </activity>
 
         <receiver
-            android:name=".pluginSDK.PluginAccessReceiver"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
+            android:name=".pluginSDK.PluginAccessBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="keepass2android.ACTION_TRIGGER_REQUEST_ACCESS" />
                 <action android:name="keepass2android.ACTION_RECEIVE_ACCESS" />
                 <action android:name="keepass2android.ACTION_REVOKE_ACCESS" />
+
             </intent-filter>
         </receiver>
 
         <receiver
             android:name=".pluginSDK.PluginActionBroadcastReceiver"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
+            android:exported="true">
             <intent-filter>
                 <action android:name="keepass2android.ACTION_OPEN_ENTRY" />
+                <action android:name="keepass2android.ACTION_ENTRY_OUTPUT_MODIFIED" />
                 <action android:name="keepass2android.ACTION_CLOSE_ENTRY_VIEW" />
-                <action android:name="keepass2android.ACTION_ENTRY_ACTION_SELECTED" />
-                
-                <action android:name="keepass2android.ACTION_LOCK_DATABASE" />
-                <action android:name="keepass2android.ACTION_UNLOCK_DATABASE" />
-                <action android:name="keepass2android.ACTION_CLOSE_DATABASE" />
-                <action android:name="keepass2android.ACTION_OPEN_DATABASE" />
+                <action android:name="keepass2android.ACTION_ADD_ENTRY_ACTION" />
+
+
             </intent-filter>
         </receiver>
 
     </application>
-
 </manifest>

@@ -26,7 +26,7 @@ class CreateEntry : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var binding: FragCreateEntryBinding
 
-    private val resultLauncherAdd = KeepassWrapper.resultLauncherAdd(this) {
+    private val resultLauncherAdd = KeepassWrapper.resultLauncher(this) {
         val r = KeepassWrapper.entryExtract(it)
         if (!KeepassWrapper.isProtected(it)) {
             CacheManager.addFidelity(r)

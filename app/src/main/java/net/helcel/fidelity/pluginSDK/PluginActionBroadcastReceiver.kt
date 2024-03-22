@@ -22,7 +22,8 @@ class PluginActionBroadcastReceiver : BroadcastReceiver() {
             get() {
                 val res = HashMap<String, String>()
                 try {
-                    val json = JSONObject(_intent.getStringExtra(Strings.EXTRA_ENTRY_OUTPUT_DATA)!!)
+                    val json =
+                        JSONObject(_intent.getStringExtra(Strings.EXTRA_ENTRY_OUTPUT_DATA) ?: "")
                     val iter = json.keys()
                     while (iter.hasNext()) {
                         val key = iter.next()
@@ -54,14 +55,13 @@ class PluginActionBroadcastReceiver : BroadcastReceiver() {
             get() = _intent.getStringExtra(Strings.EXTRA_ENTRY_ID)
 
 
-        @Throws(PluginAccessException::class)
         fun setEntryField(fieldId: String?, fieldValue: String?, isProtected: Boolean) {
             val i = Intent(Strings.ACTION_SET_ENTRY_FIELD)
             val scope = ArrayList<String?>()
             scope.add(Strings.SCOPE_CURRENT_ENTRY)
             i.putExtra(
                 Strings.EXTRA_ACCESS_TOKEN, AccessManager.getAccessToken(
-                    context, hostPackage!!, scope
+                    context, hostPackage, scope
                 )
             )
             i.setPackage(hostPackage)
@@ -132,7 +132,6 @@ class PluginActionBroadcastReceiver : BroadcastReceiver() {
              */
             get() = protectedFieldsListFromIntent
 
-        @Throws(PluginAccessException::class)
         fun addEntryAction(
             actionDisplayText: String?,
             actionIconResourceId: Int,
@@ -141,7 +140,6 @@ class PluginActionBroadcastReceiver : BroadcastReceiver() {
             addEntryFieldAction(null, null, actionDisplayText, actionIconResourceId, actionData)
         }
 
-        @Throws(PluginAccessException::class)
         fun addEntryFieldAction(
             actionId: String?,
             fieldId: String?,
@@ -191,24 +189,28 @@ class PluginActionBroadcastReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(ctx: Context, intent: Intent) {
-        val action = intent.action
+        val action = intent.action ?: return
         Log.d(
             "KP2A.pluginsdk",
             "received broadcast in PluginActionBroadcastReceiver with action=$action"
         )
-        if (action == null) return
-        if (action == Strings.ACTION_OPEN_ENTRY) {
-            openEntry(OpenEntryAction(ctx, intent))
-        } else if (action == Strings.ACTION_CLOSE_ENTRY_VIEW) {
-            closeEntryView(CloseEntryViewAction(ctx, intent))
-        } else if (action == Strings.ACTION_ENTRY_ACTION_SELECTED) {
-            actionSelected(ActionSelectedAction(ctx, intent))
-        } else if (action == Strings.ACTION_ENTRY_OUTPUT_MODIFIED) {
-            entryOutputModified(EntryOutputModifiedAction(ctx, intent))
-        } else if (action == Strings.ACTION_LOCK_DATABASE || action == Strings.ACTION_UNLOCK_DATABASE || action == Strings.ACTION_OPEN_DATABASE || action == Strings.ACTION_CLOSE_DATABASE) {
-            dbAction(DatabaseAction(ctx, intent))
-        } else {
-            //TODO handle unexpected action
+        println(action)
+
+        when (action) {
+            Strings.ACTION_OPEN_ENTRY -> openEntry(OpenEntryAction(ctx, intent))
+            Strings.ACTION_CLOSE_ENTRY_VIEW -> closeEntryView(CloseEntryViewAction(ctx, intent))
+            Strings.ACTION_ENTRY_ACTION_SELECTED ->
+                actionSelected(ActionSelectedAction(ctx, intent))
+
+            Strings.ACTION_ENTRY_OUTPUT_MODIFIED ->
+                entryOutputModified(EntryOutputModifiedAction(ctx, intent))
+
+            Strings.ACTION_LOCK_DATABASE -> dbAction(DatabaseAction(ctx, intent))
+            Strings.ACTION_UNLOCK_DATABASE -> dbAction(DatabaseAction(ctx, intent))
+            Strings.ACTION_OPEN_DATABASE -> dbAction(DatabaseAction(ctx, intent))
+            Strings.ACTION_CLOSE_DATABASE -> dbAction(DatabaseAction(ctx, intent))
+
+            else -> println(action)
         }
     }
 

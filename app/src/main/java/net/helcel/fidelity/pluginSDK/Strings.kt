@@ -18,11 +18,6 @@ object Strings {
         "keepass2android.SCOPE_QUERY_CREDENTIALS_FOR_OWN_PACKAGE"
 
     /**
-     * Plugin may query credentials for a deliberate package
-     */
-    const val SCOPE_QUERY_CREDENTIALS = "keepass2android.SCOPE_QUERY_CREDENTIALS"
-
-    /**
      * Extra key to transfer a (json serialized) list of scopes
      */
     const val EXTRA_SCOPES = "keepass2android.EXTRA_SCOPES"
@@ -97,11 +92,6 @@ object Strings {
      */
     const val EXTRA_ENTRY_ID = "keepass2android.EXTRA_ENTRY_DATA"
 
-    /**
-     * Json serialized data of the PwEntry (C# class) representing the opened entry.
-     * currently not implemented.
-     */
-    //const val EXTRA_ENTRY_DATA = "keepass2android.EXTRA_ENTRY_DATA";
 
     /**
      * Json serialized list of fields, transformed using the database context (i.e. placeholders are replaced already)
@@ -157,13 +147,6 @@ object Strings {
     const val ACTION_QUERY_CREDENTIALS_FOR_OWN_PACKAGE =
         "keepass2android.ACTION_QUERY_CREDENTIALS_FOR_OWN_PACKAGE"
 
-
-    /**
-     * Action when plugin wants to query credentials for a deliberate package
-     * The query string is passed as intent data
-     */
-    const val ACTION_QUERY_CREDENTIALS = "keepass2android.ACTION_QUERY_CREDENTIALS"
-
     /**
      * Action for an intent from the plugin to KP2A to set (i.e. add or update) a field in the entry.
      * May be used to update existing or add new fields at any time while the entry is opened.
@@ -189,7 +172,5 @@ object Strings {
     const val EXTRA_FIELD_VALUE = "keepass2android.EXTRA_FIELD_VALUE"
     const val EXTRA_FIELD_PROTECTED = "keepass2android.EXTRA_FIELD_PROTECTED"
 
-    const val PREFIX_STRING = "STRING_"
-    const val PREFIX_BINARY = "BINARY_"
 
 }

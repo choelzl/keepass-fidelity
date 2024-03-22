@@ -19,14 +19,17 @@ object BarcodeGenerator {
             android.graphics.Color.WHITE
     }
 
-    fun generateBarcode(content: String?, f: String?, width: Int): Bitmap? {
+    fun generateBarcode(content: String?, f: String?, w: Int): Bitmap? {
         if (content.isNullOrEmpty() || f.isNullOrEmpty()) {
             return null
         }
         try {
             val format = stringToFormat(f)
             val writer = MultiFormatWriter()
-            val height = (formatToRatio(format) * width).toInt()
+            val height = (w * formatToRatio(format)).toInt()
+            val width = (w * 1.0f).toInt()
+
+
             val bitMatrix: BitMatrix = writer.encode(content, format, width, height)
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
