@@ -18,6 +18,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -49,5 +51,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            app.apk
             app/build/outputs/apk/release/app-release-unsigned.apk
