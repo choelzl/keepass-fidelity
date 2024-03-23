@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@v2
 
       - name: create and checkout branch
         if: github.event_name == 'pull_request'
@@ -41,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app
-          path: app/build/release/apk/release/*.apk
+          path: app/build/outputs/apk/release/*.apk
