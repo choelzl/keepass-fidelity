@@ -9,6 +9,7 @@ on:
   push:
     branches: [ release ]
     tags:
+      - '**'   
   pull_request:
     branches: [ release ]
   workflow_dispatch:
