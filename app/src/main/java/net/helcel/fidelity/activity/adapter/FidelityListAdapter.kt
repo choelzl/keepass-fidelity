@@ -37,7 +37,6 @@ class FidelityListAdapter(
 
     inner class FidelityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
         fun bind(triple: Triple<String?, String?, String?>) {
             val text = "${triple.first}"
             binding.textView.text = text

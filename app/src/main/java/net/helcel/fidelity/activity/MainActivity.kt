@@ -9,8 +9,12 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import net.helcel.fidelity.R
 import net.helcel.fidelity.activity.fragment.Launcher
+import net.helcel.fidelity.activity.fragment.ViewEntry
 import net.helcel.fidelity.databinding.ActMainBinding
+import net.helcel.fidelity.pluginSDK.Kp2aControl.getEntryFieldsFromIntent
 import net.helcel.fidelity.tools.CacheManager
+import net.helcel.fidelity.tools.KeepassWrapper.bundleCreate
+import net.helcel.fidelity.tools.KeepassWrapper.entryExtract
 
 @SuppressLint("SourceLockedOrientationActivity")
 class MainActivity : AppCompatActivity() {
@@ -38,13 +42,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (savedInstanceState == null)
+        if (intent.extras != null)
+            loadViewEntry()
+        else if (savedInstanceState == null)
             loadLauncher()
     }
 
     private fun loadLauncher() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, Launcher())
+            .commit()
+    }
+
+    private fun loadViewEntry() {
+        val viewEntry = ViewEntry()
+        val data = getEntryFieldsFromIntent(intent)
+        viewEntry.arguments = bundleCreate(entryExtract(data))
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, viewEntry)
             .commit()
     }
 }

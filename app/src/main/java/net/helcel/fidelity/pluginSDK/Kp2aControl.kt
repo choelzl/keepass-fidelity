@@ -32,10 +32,10 @@ object Kp2aControl {
     fun getEntryFieldsFromIntent(intent: Intent?): HashMap<String, String> {
         val res = HashMap<String, String>()
         try {
-            val json = JSONObject(intent?.getStringExtra(Strings.EXTRA_ENTRY_OUTPUT_DATA)!!)
-            val iter = json.keys()
-            while (iter.hasNext()) {
-                val key = iter.next()
+            val json = JSONObject(intent?.getStringExtra(Strings.EXTRA_ENTRY_OUTPUT_DATA) ?: "")
+            val itr = json.keys()
+            while (itr.hasNext()) {
+                val key = itr.next()
                 val value = json[key].toString()
                 res[key] = value
             }

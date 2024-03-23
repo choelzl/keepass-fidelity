@@ -42,12 +42,8 @@ object KeepassWrapper {
         callback: (HashMap<String, String>) -> Unit
     ): ActivityResultLauncher<Intent> {
         return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-
-            println(result.resultCode)
-            println(result.data.toString())
             if (result.resultCode == Activity.RESULT_OK) {
                 val credentials = Kp2aControl.getEntryFieldsFromIntent(result.data)
-                println(credentials.toList().toString())
                 callback(credentials)
             }
         }
@@ -67,6 +63,10 @@ object KeepassWrapper {
         data.putString("code", code)
         data.putString("fmt", fmt)
         return data
+    }
+
+    fun bundleCreate(triple: Triple<String?, String?, String?>): Bundle {
+        return bundleCreate(triple.first, triple.second, triple.third)
     }
 
     fun bundleExtract(data: Bundle?): Triple<String?, String?, String?> {

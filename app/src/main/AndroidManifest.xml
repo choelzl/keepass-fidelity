@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -21,27 +22,13 @@
 
         <receiver
             android:name=".pluginSDK.PluginAccessBroadcastReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="keepass2android.ACTION_TRIGGER_REQUEST_ACCESS" />
                 <action android:name="keepass2android.ACTION_RECEIVE_ACCESS" />
                 <action android:name="keepass2android.ACTION_REVOKE_ACCESS" />
-
             </intent-filter>
         </receiver>
-
-        <receiver
-            android:name=".pluginSDK.PluginActionBroadcastReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="keepass2android.ACTION_OPEN_ENTRY" />
-                <action android:name="keepass2android.ACTION_ENTRY_OUTPUT_MODIFIED" />
-                <action android:name="keepass2android.ACTION_CLOSE_ENTRY_VIEW" />
-                <action android:name="keepass2android.ACTION_ADD_ENTRY_ACTION" />
-
-
-            </intent-filter>
-        </receiver>
-
     </application>
 </manifest>

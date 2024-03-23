@@ -7,9 +7,11 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.FormatException
 import net.helcel.fidelity.R
 import net.helcel.fidelity.databinding.FragCreateEntryBinding
@@ -34,7 +36,7 @@ class CreateEntry : Fragment() {
         startViewEntry(r.first, r.second, r.third)
     }
 
-    private var isValid: Boolean = false
+    private var isValidBarcode: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,41 +53,14 @@ class CreateEntry : Fragment() {
         binding.editTextCode.setText(res.second)
         binding.editTextFormat.setText(res.third, false)
 
-        val changeListener = {
-            isValid = false
-            handler.removeCallbacksAndMessages(null)
-            handler.postDelayed({
-                updatePreview()
-            }, DEBOUNCE_DELAY)
-        }
-
         binding.editTextCode.addTextChangedListener { changeListener() }
         binding.editTextFormat.addTextChangedListener { changeListener() }
         binding.editTextFormat.addTextChangedListener { binding.editTextFormat.error = null }
-        binding.btnSave.setOnClickListener {
-            if (!isValid() || !isValid) {
-                ErrorToaster.formIncomplete(requireActivity())
+        binding.btnSave.setOnClickListener { submit() }
 
-            } else {
-                val kpEntry = KeepassWrapper.entryCreate(
-                    this,
-                    binding.editTextTitle.text.toString(),
-                    binding.editTextCode.text.toString(),
-                    binding.editTextFormat.text.toString(),
-                    binding.checkboxProtected.isChecked,
-                )
-                try {
-                    resultLauncherAdd.launch(
-                        Kp2aControl.getAddEntryIntent(
-                            kpEntry.first,
-                            kpEntry.second
-                        )
-                    )
-                } catch (e: ActivityNotFoundException) {
-                    ErrorToaster.noKP2AFound(requireActivity())
-                }
-            }
-        }
+        binding.editTextTitle.onDone { submit() }
+        binding.editTextCode.onDone { submit() }
+
 
         updatePreview()
         return binding.root
@@ -99,7 +74,7 @@ class CreateEntry : Fragment() {
                 600
             )
             binding.imageViewPreview.setImageBitmap(barcodeBitmap)
-            isValid = true
+            isValidBarcode = true
         } catch (e: FormatException) {
             binding.imageViewPreview.setImageBitmap(null)
             binding.editTextCode.error = "Invalid format"
@@ -112,19 +87,19 @@ class CreateEntry : Fragment() {
         }
     }
 
-    private fun isValid(): Boolean {
+    private fun isValidForm(): Boolean {
         var valid = true
-        if (binding.editTextTitle.text.isNullOrEmpty()) {
+        if (binding.editTextFormat.text.isNullOrEmpty()) {
             valid = false
-            binding.editTextTitle.error = "Title cannot be empty"
+            binding.editTextFormat.error = "Format cannot be empty"
         }
         if (binding.editTextCode.text.isNullOrEmpty()) {
             valid = false
             binding.editTextCode.error = "Code cannot be empty"
         }
-        if (binding.editTextFormat.text.isNullOrEmpty()) {
+        if (binding.editTextTitle.text.isNullOrEmpty()) {
             valid = false
-            binding.editTextFormat.error = "Format cannot be empty"
+            binding.editTextTitle.error = "Title cannot be empty"
         }
         return valid
     }
@@ -136,6 +111,52 @@ class CreateEntry : Fragment() {
 
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.container, viewEntryFragment).commit()
+    }
+
+
+    private fun changeListener() {
+        isValidBarcode = false
+        handler.removeCallbacksAndMessages(null)
+        handler.postDelayed({
+            updatePreview()
+        }, DEBOUNCE_DELAY)
+    }
+
+
+    private fun TextInputEditText.onDone(callback: () -> Unit) {
+        setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                callback.invoke()
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+    }
+
+    private fun submit() {
+        if (!isValidForm() || !isValidBarcode) {
+            ErrorToaster.formIncomplete(context)
+        } else {
+            val kpEntry = KeepassWrapper.entryCreate(
+                this,
+                binding.editTextTitle.text.toString(),
+                binding.editTextCode.text.toString(),
+                binding.editTextFormat.text.toString(),
+                binding.checkboxProtected.isChecked,
+            )
+            try {
+                resultLauncherAdd.launch(
+                    Kp2aControl.getAddEntryIntent(
+                        kpEntry.first,
+                        kpEntry.second
+                    )
+                )
+            } catch (e: ActivityNotFoundException) {
+                ErrorToaster.noKP2AFound(context)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
 }

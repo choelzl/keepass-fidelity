@@ -6,9 +6,6 @@ import org.json.JSONArray
 import org.json.JSONException
 
 
-class PluginAccessException(msg: String) : Exception(msg)
-
-
 object AccessManager {
     private const val PREF_KEY_SCOPE = "scope"
     private const val PREF_KEY_TOKEN = "token"
@@ -93,13 +90,5 @@ object AccessManager {
         if (hostPrefs.contains(hostPackage)) {
             hostPrefs.edit().remove(hostPackage).apply()
         }
-    }
-
-    fun getAccessToken(
-        context: Context, hostPackage: String?,
-        scopes: ArrayList<String?>
-    ): String {
-        return tryGetAccessToken(context, hostPackage, scopes)
-            ?: throw PluginAccessException(hostPackage + scopes)
     }
 }

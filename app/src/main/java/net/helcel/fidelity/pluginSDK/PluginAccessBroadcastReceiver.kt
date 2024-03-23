@@ -11,7 +11,7 @@ class PluginAccessBroadcastReceiver : BroadcastReceiver() {
             Strings.ACTION_TRIGGER_REQUEST_ACCESS -> requestAccess(ctx, intent)
             Strings.ACTION_RECEIVE_ACCESS -> receiveAccess(ctx, intent)
             Strings.ACTION_REVOKE_ACCESS -> revokeAccess(ctx, intent)
-            else -> println(action)
+            else -> {}
         }
     }
 
@@ -46,8 +46,6 @@ class PluginAccessBroadcastReceiver : BroadcastReceiver() {
     private val scopes: ArrayList<String?> = ArrayList(
         listOf(
             Strings.SCOPE_QUERY_CREDENTIALS_FOR_OWN_PACKAGE,
-            Strings.SCOPE_DATABASE_ACTIONS,
-            Strings.SCOPE_CURRENT_ENTRY,
         )
     )
 }
