@@ -44,3 +44,10 @@ jobs:
         with:
           name: app.apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            app.apk
+            app/build/outputs/apk/release/app-release-unsigned.apk
