@@ -16,14 +16,22 @@
     <string name="format">Format</string>
     <string name="save">Save</string>
     <string-array name="format_array">
-        <item>CODE_128</item>
         <item>CODE_39</item>
         <item>CODE_93</item>
+        <item>CODE_128</item>
         <item>EAN_8</item>
         <item>EAN_13</item>
         <item>CODE_QR</item>
         <item>UPC_A</item>
         <item>UPC_E</item>
         <item>PDF_417</item>
+        <item>AZTEC</item>
+        <item>CODABAR</item>
+        <item>MAXICODE</item>
+        <item>DATA_MATRIX</item>
+        <item>ITF</item>
+        <item>RSS_14</item>
+        <item>RSS_EXPANDED</item>
+        <item>UPC_EAN</item>
     </string-array>
 </resources>
