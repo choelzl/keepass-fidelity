@@ -1,10 +1,10 @@
 <!--suppress ALL -->
-
-
-
 <div align="center">
   <h1>Keepass Fidelity</h1>
+  <img src="./app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Logo">
+  
   <p>A minimalist fidelity/loyalty card plugin</p>
+  
   <img src="https://forthebadge.com/images/badges/built-for-android.svg" alt="Built for Android">
   <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="Built with love">
   <br>
@@ -32,7 +32,7 @@
 - Recently used history for fast access
 - Protect entries from caching
 - Minimalist design and features
-- Supported Formats:CODE_39, CODE_93, CODE_128, EAN_8, EAN_13, UPC_A, UPC_E, CODE_QR, PDF_417, AZTEC, CODABAR, DATA_MATRIX, ITF
+- Supported Formats: CODE_39, CODE_93, CODE_128, EAN_8, EAN_13, UPC_A, UPC_E, CODE_QR, PDF_417, AZTEC, CODABAR, DATA_MATRIX, ITF
 
 ## 📳 Installation
 
