@@ -45,6 +45,7 @@ class Scanner : Fragment() {
         return binding.root
     }
 
+
     private fun startCreateEntry() {
         val createEntryFragment = CreateEntry()
         createEntryFragment.arguments =
@@ -89,13 +90,14 @@ class Scanner : Fragment() {
                 }
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             val analysisUseCase = getAnalysisUseCase { code, format ->
-                if (code != null && format != null) {
+                if (!code.isNullOrEmpty() && !format.isNullOrEmpty()) {
                     this.code = code
                     this.fmt = format
-                    binding.btnScanDone.isEnabled = true
-
-                } else {
-                    binding.btnScanDone.isEnabled = false
+                }
+                val isDone = this.code.isNotEmpty() && this.fmt.isNotEmpty()
+                requireActivity().runOnUiThread {
+                    binding.btnScanDone.isEnabled = isDone
+                    binding.ScanActive.isEnabled = !isDone
                 }
             }
             try {

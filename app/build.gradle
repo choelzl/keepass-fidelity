@@ -77,6 +77,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'com.google.zxing:core:3.5.3'
-    implementation 'com.google.mlkit:barcode-scanning:17.2.0'
 
 }
