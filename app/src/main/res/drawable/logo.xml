@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:width="256dp"
+        android:height="256dp"
+        android:viewportWidth="256"
+        android:viewportHeight="256"
+        android:gravity="center"
+        >
+    <layer-list>
+    <item
         android:width="128dp"
         android:height="128dp"
         android:gravity="center"
@@ -18,4 +26,5 @@
         android:gravity="center"
         android:left="72dp"
         android:bottom="20dp" />
+    </layer-list></item>
 </layer-list>
