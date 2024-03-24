@@ -23,6 +23,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        run: |
+          echo "${{ secrets.RELEASE_KEYSTORE }}" > keystore.asc
+          echo "${{ secrets.RELEASE_KEY}}" > key.acs
+          gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" --batch keystore.asc > app/keystore.properties
+          gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" --batch key.asc > app/key.jks
+
       - uses: gradle/wrapper-validation-action@v2
 
       - name: create and checkout branch
@@ -41,14 +47,14 @@ jobs:
       - name: Build APK
         run: ./gradlew assemble
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app.apk
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+      # - name: Upload APK
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: app.apk
+      #     path: app/build/outputs/apk/release/app-release.apk
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            app/build/outputs/apk/release/app-release-unsigned.apk
+            app/build/outputs/apk/release/app-release.apk

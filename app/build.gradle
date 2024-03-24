@@ -5,17 +5,32 @@ plugins {
 }
 
 
+def keystorePropertiesFile = rootProject.file("app/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
 android {
     namespace 'net.helcel.fidelity'
     compileSdk 34
 
     defaultConfig {
         applicationId 'net.helcel.fidelity'
-        resValue "string", "app_name", "Keepass Fideity"
+        resValue "string", "app_name", "Keepass Fidelity"
         minSdk 28
         targetSdk 34
         versionCode 1
         versionName "1.0"
+    }
+
+
+    signingConfigs {
+        create("release") {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
     }
 
     buildTypes {
@@ -26,6 +41,7 @@ android {
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
