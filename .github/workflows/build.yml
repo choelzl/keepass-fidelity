@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: set up secrets
         run: |
           echo "${{ secrets.RELEASE_KEYSTORE }}" > keystore.asc
           echo "${{ secrets.RELEASE_KEY}}" > key.acs
