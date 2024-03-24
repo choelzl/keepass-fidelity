@@ -32,7 +32,7 @@
 - Recently used history for fast access
 - Protect entries from caching
 - Minimalist design and features
-- Supported Formats: CODE_39, CODE_93, CODE_128, EAN_8, EAN_13, UPC_A, UPC_E, UPC_EAN, CODE_QR, PDF_417, AZTEC, CODABAR, MAXICODE, DATA_MATRIX, ITF, RSS_14, RSS_EXPANDED
+- Supported Formats:CODE_39, CODE_93, CODE_128, EAN_8, EAN_13, UPC_A, UPC_E, CODE_QR, PDF_417, AZTEC, CODABAR, DATA_MATRIX, ITF
 
 ## 📳 Installation
 

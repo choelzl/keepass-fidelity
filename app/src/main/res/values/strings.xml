@@ -27,11 +27,7 @@
         <item>PDF_417</item>
         <item>AZTEC</item>
         <item>CODABAR</item>
-        <item>MAXICODE</item>
         <item>DATA_MATRIX</item>
         <item>ITF</item>
-        <item>RSS_14</item>
-        <item>RSS_EXPANDED</item>
-        <item>UPC_EAN</item>
     </string-array>
 </resources>
