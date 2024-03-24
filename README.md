@@ -32,11 +32,11 @@
 ## 📳 Installation
 
 <div style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
-    <a href="" style="display:none">
+    <a href="" style="display:none;visibility:hidden">
         <img width="200" height="80" alt="Izzy Download" src=".github.images/izzy.png">
     </a>
     <a href="https://github.com/choelzl/keepass-fidelity/releases/latest">
-        <img width="200" height="84" alt="APK Download" src=".github/images/apk">
+        <img width="200" height="84" alt="APK Download" src=".github/images/apk.png">
     </a>
 </div>
 
