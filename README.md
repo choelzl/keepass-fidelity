@@ -47,7 +47,8 @@
 
 ## ⚙️ Permissions
 
-- `CAMERA`: necessary for the scanning of barcodes
+- `CAMERA`: necessary for importing barcodes from camera
+- `READ_MEDIA_VISUAL_USER_SELECTED`: necessary for the importing barcode from images
 
 ## 📝 Contribute
 
