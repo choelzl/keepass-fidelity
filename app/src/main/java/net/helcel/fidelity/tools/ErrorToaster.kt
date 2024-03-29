@@ -20,4 +20,12 @@ object ErrorToaster {
     fun invalidFormat(activity: Context?) {
         helper(activity, "Invalid Format", Toast.LENGTH_SHORT)
     }
+
+    fun nothingFound(activity: Context?) {
+        helper(activity, "Nothing Found", Toast.LENGTH_SHORT)
+    }
+
+    fun noPermission(activity: Context?) {
+        helper(activity, "Missing Permission", Toast.LENGTH_LONG)
+    }
 }

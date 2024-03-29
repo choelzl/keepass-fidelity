@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.MultiFormatReader
 import com.google.zxing.NotFoundException
@@ -15,14 +14,13 @@ import net.helcel.fidelity.tools.BarcodeFormatConverter.formatToString
 import java.util.concurrent.Executors
 
 
+@OptIn(ExperimentalGetImage::class)
 object BarcodeScanner {
 
-    @OptIn(ExperimentalGetImage::class)
-    private fun processImageProxy(
-        imageProxy: ImageProxy,
+    private fun processImage(
+        bitmap: Bitmap,
         cb: (String?, String?) -> Unit
     ) {
-        val bitmap = imageProxy.toBitmap() // Convert ImageProxy to Bitmap
         val binaryBitmap = createBinaryBitmap(bitmap)
         val reader = MultiFormatReader()
         try {
@@ -32,8 +30,6 @@ object BarcodeScanner {
             cb(null, null)
         } catch (e: ReaderException) {
             cb(null, null)
-        } finally {
-            imageProxy.close()
         }
     }
 
@@ -45,13 +41,21 @@ object BarcodeScanner {
         return BinaryBitmap(HybridBinarizer(source))
     }
 
-    fun getAnalysisUseCase(cb: (String?, String?) -> Unit): ImageAnalysis {
+    fun analysisUseCase(cb: (String?, String?) -> Unit): ImageAnalysis {
         val analysisUseCase = ImageAnalysis.Builder().build()
         analysisUseCase.setAnalyzer(
             Executors.newSingleThreadExecutor()
         ) { imageProxy ->
-            processImageProxy(imageProxy, cb)
+            val bitmap = imageProxy.toBitmap()
+            imageProxy.close()
+            bitmapUseCase(bitmap, cb)
         }
         return analysisUseCase
     }
+
+    fun bitmapUseCase(bitmap: Bitmap, cb: (String?, String?) -> Unit) {
+        processImage(bitmap, cb)
+    }
+
+
 }

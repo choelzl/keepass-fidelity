@@ -49,6 +49,11 @@ class Launcher : Fragment() {
             startScanner()
             hideMenuAdd()
         }
+        binding.btnOpen.setOnClickListener {
+            startFileScanner()
+            hideMenuAdd()
+        }
+
 
         binding.btnManual.setOnClickListener {
             startCreateEntry()
@@ -94,6 +99,10 @@ class Launcher : Fragment() {
 
     private fun startScanner() {
         startFragment(Scanner())
+    }
+
+    private fun startFileScanner() {
+        startFragment(FileScanner())
     }
 
     private fun startCreateEntry() {

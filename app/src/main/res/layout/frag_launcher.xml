@@ -57,6 +57,16 @@
                 app:srcCompat="@drawable/camera" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnOpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/open"
+                app:fabCustomSize="46dp"
+                app:maxImageSize="32dp"
+                app:srcCompat="@drawable/open" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnManual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

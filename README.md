@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <div align="center">
   <h1>Keepass Fidelity</h1>
-  <img src="./app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Logo">
+  <img style="width: 120px;" src="./metadata/en-US/images/icon.png" alt="Logo">
   
   <p>A minimalist fidelity/loyalty card plugin</p>
   
@@ -18,9 +18,9 @@
 <div align="center">
   <table>
     <tr>
-      <td style="width: 33%; height: 100px;"><img src=".github/images/launcher.jpg" alt="Launcher" style="width: 100%; height: 100%;"></td>
-      <td style="width: 33%; height: 100px;"><img src=".github/images/view.jpg" alt="View" style="width: 100%; height: 100%;"></td>
-      <td style="width: 33%; height: 100px;"><img src=".github/images/edit.jpg" alt="Edit" style="width: 100%; height: 100%;"></td>
+      <td style="width: 33%; height: 100px;"><img src="./metadata/en-US/images/phoneScreenshots/launcher.jpg" alt="Launcher" style="width: 100%; height: 100%;"></td>
+      <td style="width: 33%; height: 100px;"><img src="./metadata/en-US/images/phoneScreenshots/view.jpg" alt="View" style="width: 100%; height: 100%;"></td>
+      <td style="width: 33%; height: 100px;"><img src="./metadata/en-US/images/phoneScreenshots/edit.jpg" alt="Edit" style="width: 100%; height: 100%;"></td>
     </tr>
   </table>
 </div>

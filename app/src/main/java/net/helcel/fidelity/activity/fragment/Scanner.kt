@@ -2,24 +2,22 @@ package net.helcel.fidelity.activity.fragment
 
 import android.Manifest
 import android.content.ContentValues
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import net.helcel.fidelity.R
 import net.helcel.fidelity.databinding.FragScannerBinding
-import net.helcel.fidelity.tools.BarcodeScanner.getAnalysisUseCase
+import net.helcel.fidelity.tools.BarcodeScanner.analysisUseCase
+import net.helcel.fidelity.tools.ErrorToaster
 import net.helcel.fidelity.tools.KeepassWrapper
-
-private const val CAMERA_PERMISSION_REQUEST_CODE = 1
 
 class Scanner : Fragment() {
 
@@ -27,6 +25,17 @@ class Scanner : Fragment() {
 
     private var code: String = ""
     private var fmt: String = ""
+
+
+    private val resultPermissionRequest =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            if (it) {
+                bindCameraUseCases()
+            } else {
+                parentFragmentManager.popBackStack()
+                ErrorToaster.noPermission(context)
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +46,8 @@ class Scanner : Fragment() {
         binding.btnScanDone.setOnClickListener {
             startCreateEntry()
         }
-        when (hasCameraPermission()) {
-            true -> bindCameraUseCases()
-            else -> requestPermission()
-        }
         binding.btnScanDone.isEnabled = false
+        resultPermissionRequest.launch(Manifest.permission.CAMERA)
         return binding.root
     }
 
@@ -55,26 +61,16 @@ class Scanner : Fragment() {
             .commit()
     }
 
-    private fun hasCameraPermission() =
-        ActivityCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
 
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.CAMERA),
-            CAMERA_PERMISSION_REQUEST_CODE
-        )
-        ActivityCompat.OnRequestPermissionsResultCallback { c, p, i ->
-            require(c == CAMERA_PERMISSION_REQUEST_CODE)
-            require(p.contains(Manifest.permission.CAMERA))
-            val el = i[p.indexOf(Manifest.permission.CAMERA)]
-            if (el != PackageManager.PERMISSION_GRANTED) {
-                startCreateEntry()
-            }
-
+    private fun scannerResult(code: String?, format: String?) {
+        if (!code.isNullOrEmpty() && !format.isNullOrEmpty()) {
+            this.code = code
+            this.fmt = format
+        }
+        val isDone = this.code.isNotEmpty() && this.fmt.isNotEmpty()
+        requireActivity().runOnUiThread {
+            binding.btnScanDone.isEnabled = isDone
+            binding.ScanActive.isEnabled = !isDone
         }
     }
 
@@ -89,16 +85,8 @@ class Scanner : Fragment() {
                     it.setSurfaceProvider(binding.cameraView.surfaceProvider)
                 }
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-            val analysisUseCase = getAnalysisUseCase { code, format ->
-                if (!code.isNullOrEmpty() && !format.isNullOrEmpty()) {
-                    this.code = code
-                    this.fmt = format
-                }
-                val isDone = this.code.isNotEmpty() && this.fmt.isNotEmpty()
-                requireActivity().runOnUiThread {
-                    binding.btnScanDone.isEnabled = isDone
-                    binding.ScanActive.isEnabled = !isDone
-                }
+            val analysisUseCase = analysisUseCase { code, format ->
+                scannerResult(code, format)
             }
             try {
                 cameraProvider.bindToLifecycle(
