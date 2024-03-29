@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <div align="center">
   <h1>Keepass Fidelity</h1>
-  <img style="width: 64px;" src="./metadata/en-US/images/icon.png" alt="Logo">
+  <img width="100px" src="./metadata/en-US/images/icon.png" alt="Logo">
   
   <p>A minimalist fidelity/loyalty card plugin</p>
   
