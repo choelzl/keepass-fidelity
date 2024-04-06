@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:versionCode="6"
-    android:versionName="1.2a">
+    android:versionCode="7"
+    android:versionName="1.2b">
 
     <uses-feature android:name="android.hardware.camera" />
 
