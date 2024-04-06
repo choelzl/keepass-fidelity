@@ -68,7 +68,7 @@ class Scanner : Fragment() {
             this.fmt = format
         }
         val isDone = this.code.isNotEmpty() && this.fmt.isNotEmpty()
-        requireActivity().runOnUiThread {
+        activity?.runOnUiThread {
             binding.btnScanDone.isEnabled = isDone
             binding.ScanActive.isEnabled = !isDone
         }

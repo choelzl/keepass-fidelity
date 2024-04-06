@@ -21,10 +21,10 @@ object KeepassWrapper {
         code: String,
         format: String,
         protectCode: Boolean,
-    ): Pair<HashMap<String?, String?>, ArrayList<String?>> {
+    ): Pair<HashMap<String, String>, ArrayList<String>> {
 
-        val fields = HashMap<String?, String?>()
-        val protected = ArrayList<String?>()
+        val fields = HashMap<String, String>()
+        val protected = ArrayList<String>()
         fields[KeepassDef.TitleField] = title
         fields[KeepassDef.UrlField] =
             "androidapp://" + fragment.requireActivity().packageName

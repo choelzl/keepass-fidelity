@@ -151,6 +151,11 @@ class CreateEntry : Fragment() {
                         kpEntry.second
                     )
                 )
+                if (!binding.checkboxProtected.isChecked) {
+                    val r = KeepassWrapper.entryExtract(kpEntry.first)
+                    CacheManager.addFidelity(r)
+                }
+                activity?.supportFragmentManager?.popBackStack()
             } catch (e: ActivityNotFoundException) {
                 ErrorToaster.noKP2AFound(context)
             } catch (e: Exception) {

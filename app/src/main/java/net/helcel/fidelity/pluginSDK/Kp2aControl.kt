@@ -7,8 +7,8 @@ import org.json.JSONObject
 object Kp2aControl {
 
     fun getAddEntryIntent(
-        fields: HashMap<String?, String?>,
-        protectedFields: ArrayList<String?>?
+        fields: HashMap<String, String>,
+        protectedFields: ArrayList<String>?
     ): Intent {
         val outputData = JSONObject((fields as Map<*, *>)).toString()
         val startKp2aIntent = Intent(Strings.ACTION_START_WITH_TASK)
