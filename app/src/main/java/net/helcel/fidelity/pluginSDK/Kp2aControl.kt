@@ -15,7 +15,7 @@ object Kp2aControl {
         startKp2aIntent.addCategory(Intent.CATEGORY_DEFAULT)
         startKp2aIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startKp2aIntent.putExtra("KP2A_APPTASK", "CreateEntryThenCloseTask")
-        startKp2aIntent.putExtra("ShowUserNotifications", "false")
+        startKp2aIntent.putExtra("ShowUserNotifications", "true")
         startKp2aIntent.putExtra(Strings.EXTRA_ENTRY_OUTPUT_DATA, outputData)
         if (protectedFields != null)
             startKp2aIntent.putStringArrayListExtra(

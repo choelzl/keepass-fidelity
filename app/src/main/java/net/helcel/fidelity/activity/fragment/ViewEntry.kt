@@ -80,7 +80,7 @@ class ViewEntry : Fragment() {
         return (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
     }
 
-    private fun setScreenBrightness(brightness: Float?) {
+    private fun setScreenBrightness(brightness: Float) {
         requireActivity().window?.attributes?.screenBrightness = brightness
     }
 }

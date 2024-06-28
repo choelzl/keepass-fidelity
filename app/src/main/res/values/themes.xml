@@ -2,11 +2,10 @@
 <resources>
 
     <style name="Theme.Fidelity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <item name="colorPrimary">#7DB9F5</item>
-        <item name="colorPrimaryVariant">#7DB9F5</item>
-        <item name="colorSecondary">#7DB9F5</item>
-        <item name="colorSecondaryVariant">#7DB9F5</item>
-        <item name="colorOnPrimary">#030B12</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/darkgray</item>
     </style>
 </resources>

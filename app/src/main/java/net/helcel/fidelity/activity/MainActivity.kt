@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         onBackPressedDispatcher.addCallback(this) {
             if (supportFragmentManager.backStackEntryCount > 0) {
                 supportFragmentManager.popBackStackImmediate()
