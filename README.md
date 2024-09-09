@@ -1,4 +1,5 @@
 <!--suppress ALL -->
+Migrated to https://github.com/helcel-net/keepass-fidelity
 <div align="center">
   <h1>Keepass Fidelity</h1>
   <img width="100px" src="./metadata/en-US/images/icon.png" alt="Logo">
@@ -8,8 +9,8 @@
   <img src="https://forthebadge.com/images/badges/built-for-android.svg" alt="Built for Android">
   <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="Built with love">
   <br>
-    <a href="https://github.com/choelzl/keepass-fidelity/actions/workflows/build.yml">
-    <img src="https://github.com/choelzl/keepass-fidelity/actions/workflows/build.yml/badge.svg?branch=main" alt="Build Status">
+    <a href="https://github.com/helcel-net/keepass-fidelity/actions/workflows/build.yml">
+    <img src="https://github.com/choelzl/helcel-net/actions/workflows/build.yml/badge.svg?branch=main" alt="Build Status">
   </a>
 </div>
 
